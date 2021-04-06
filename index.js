@@ -70,7 +70,36 @@ window.addEventListener('load', () => {
                 
             })
             
-        })
+        }, function(){
+            alert("Acces refusé !");
+            localisation.innerHTML = "Paris";
+                        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=48.856614&lon=2.3522219&exclude minutely&appid=3c689dc9b03bc591c65844b3386a2a5d&lang=fr&units=metric")
+            .then(reponse => {
+                console.log(reponse);
+                return reponse.json();
+            })
+            .then(data => {
+                console.log(data);
+                const {temp} = data.current;
+                var {description, icon} = data.current.weather[0];
+                const {min, max} = data.daily[0].temp;
+                MinMax.textContent = "Max. " + Math.round(max) + "° " + "Min. " + Math.round(min) + "°";
+                description_display.textContent = description;
+                temperatureAct.textContent = Math.round(temp) + "°";
+                
+                
+                var MinMaxJour = [];
+                for (let i=1; i<6; i++) {
+                    const{min, max} = data.daily[i].temp;
+                    const{icon} = data.daily[i].weather[0]
+                    let value = Math.round(max) + "° - " + Math.round(min) + "°";
+                    Temp[i-1].textContent = value; 
+                    Icon[i-1].setAttribute("src", IconCheck(icon));
+                }
+               
+                
+            })
+})
     }
     
 function SetJour() {
@@ -100,6 +129,4 @@ SetJour();
        
     
       });
-
-
 
