@@ -71,7 +71,7 @@ window.addEventListener('load', () => {
             })
             
         }, function(){
-            alert("Acces refusé !");
+            alert("Localisation Indisponible - Par défaut(Paris)");
             localisation.innerHTML = "Paris";
                         fetch("https://api.openweathermap.org/data/2.5/onecall?lat=48.856614&lon=2.3522219&exclude minutely&appid=3c689dc9b03bc591c65844b3386a2a5d&lang=fr&units=metric")
             .then(reponse => {
